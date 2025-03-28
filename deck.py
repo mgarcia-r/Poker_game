@@ -3,6 +3,11 @@ class Card:
     RANKS=["2","3","4","5","6","7","8","9","10","J","Q","K","A"]
     SUITS=["♣","♦","♥","♠"] #clubs, diamonds, hearts, spades
     def __init__(self,rank,suit):
+        """
+        Method that creates a card instance by checking if rank and suit are valid, meaning if they are within the lists RANKS and SUITS
+        :param rank: a rank
+        :param suit: a suit
+        """
         if rank not in self.RANKS:
             raise ValueError("invalid rank")
         if suit not in self.SUITS:
@@ -25,6 +30,25 @@ class Card:
     def __repr__(self):
         return self.__str__()
 
+    def __eq__(self, other):
+        """
+        Checks if two cards are equal by seeing if they have the same rank
+        :param other: card 2
+        :return: -
+        """
+        return self.rank==other.rank
+
+    #To check if a card is greater/lesser than another we need to compare their POSITIONS in the list RANKS
+    def __lt__(self, other):
+        """
+        Checks if a card is lesser than another by comparing their position in the list RANKS
+        :param other: card 2
+        :return: -
+        """
+        return self.RANKS.index(self.rank)<self.RANKS.index(other.rank)
+
+
+
 class Deck:
     def __init__(self):
         _cards=[]
@@ -45,6 +69,7 @@ class Deck:
 
     def deal(self):
         return self.cards.pop(0)
+
 
 if __name__=="__main__":
     c1= Card("A","♠") #card created
