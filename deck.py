@@ -47,7 +47,13 @@ class Card:
         """
         return self.RANKS.index(self.rank)<self.RANKS.index(other.rank)
 
-
+    def __gt__(self, other):
+        """
+        Checks if a card is greater than another by comparing their position in the list RANKS
+        :param other: card 2
+        :return: -
+        """
+        return self.RANKS.index(self.rank) > self.RANKS.index(other.rank)
 
 class Deck:
     def __init__(self):

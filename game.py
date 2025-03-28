@@ -87,11 +87,12 @@ class Hand:
         else:
             return False
 
-
-
-
-
-
+    @property
+    def is_straight(self):
+        self.cards.sort()
+        distance = Card.RANKS.index(self.cards[4].rank) - \
+                   Card.RANKS.index(self.cards[0].rank)
+        return self.num_matches == 0 and distance == 4
 
 matches=0
 count=0
@@ -100,12 +101,12 @@ while matches<1000:
     deck.shuffle()
     hand = Hand(deck)
     count+=1
-    if hand.is_full_house:
+    if hand.is_straight:
         #print(hand)
         matches+=1
         #break
 
-print(f"The probability of 2 pairs is {100*matches/count}%")
+print(f"The probability of straight is {100*matches/count}%")
 
 
 
