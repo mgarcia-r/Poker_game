@@ -13,9 +13,17 @@ class Hand:
 
     @property
     def cards(self):
+        """
+        Decorator method to access the cards as .cards and not as ._cards
+        :return: cards
+        """
         return self._cards
 
     def __str__(self):
+        """
+        Magic method on how to print the deck as a string
+        :return: list of cards in the deck as a string
+        """
         return str(self.cards)
 
     @property
@@ -66,12 +74,20 @@ class Hand:
 
     @property
     def is_trips(self):
+        """
+        Checks if a hand has 3 pairs
+        :return: True if it does/ False if it doesn't
+        """
         if self.num_matches == 6:
             return True
         return False
 
     @property
     def is_quads(self):
+        """
+        Checks if a hand has 6 pairs
+        :return: True if it does/ False if it doesn't
+        """
         if self.num_matches == 12:
             return True
         return False
@@ -89,6 +105,12 @@ class Hand:
 
     @property
     def is_straight(self):
+        """
+        Checks if a hand is a straight by checking if:
+        1. There are no repeated cards, the number of matches is 0
+        2. The difference between the highest card and the lowest card rank indices is ==4
+        :return: True if the hand is a straight, False otherwise
+        """
         self.cards.sort()
         distance = Card.RANKS.index(self.cards[4].rank) - \
                    Card.RANKS.index(self.cards[0].rank)
